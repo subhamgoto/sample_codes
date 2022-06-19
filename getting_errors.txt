@@ -1,0 +1,71 @@
+select * from test where col1 like '%day%'   does not work in execute db query in devdata
+select * from test where col1 = 'Mon\'day'   quotes and other characters we need to escape in execute db query
+
+
+1. null string should be '' (blank) string while saving using Edit record
+
+1. add new category called Bluetooth in Logic Page
+
+
+function getErrors(){
+	
+	var errors = 0;
+	var checkedBlocks = [];
+	$(Blockly.mainWorkspace.connectionDBList).each(function(s,o){
+		if(o){
+			$(o.connections_).each(function(i, x){
+				
+				if(!checkedBlocks.includes(x.sourceBlock_.id)){
+					checkedBlocks.push(x.sourceBlock_.id);
+					if(x.sourceBlock_.outputConnection && !x.sourceBlock_.outputConnection.targetConnection){
+						errors=errors+1;
+					}
+					$(x.sourceBlock_.inputList).each(function(j, y){
+						if(y.connection && !y.connection.targetConnection){
+							errors=errors+1;
+						}
+						
+					})
+				}
+				
+				
+				
+				
+				
+			})
+		}
+		
+	});
+	console.log("erros=> "+errors);
+}
+
+function onChangeEvent(event) {
+			if (event.type == Blockly.Events.BLOCK_MOVE || event.type == Blockly.Events.BLOCK_DELETE) {
+				setTimeout(getErrors, 500);
+			}
+}
+Blockly.mainWorkspace.addChangeListener(onChangeEvent);
+		
+BlockID  y22I30e3M2XTlPJI4(rD
+		 [/vc3~(pRKb4OQL9qN1!
+WorkspaceID 9cTVpITRas~K:aU++bb4
+
+Group: D~Wpls+cS8)0M9|xIS5J
+
+Blockly.mainWorkspace.getBlockById("OV~-LF:_Ud-Q:nqxaPH4")
+
+
+var result = deepDiffMapper.map(temp1, temp2);
+console.log(result);
+
+$(Blockly.mainWorkspace.getBlockById("y22I30e3M2XTlPJI4(rD").inputList).each(function(i,x){
+	console.log(x.connection.targetConnection)
+})
+
+
+RenderedConnection event --> targetConnection.sourceBlock_.id
+
+dbOpposite_.connection_
+
+
+
