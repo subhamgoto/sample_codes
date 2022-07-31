@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="./dataTables.checkboxes.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type='text/javascript' src='./dataTables.checkboxes.js' id='custom_js1-js'></script>
+
+<table id="example" class="display" style="width:100%">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Position</th>
+			<th>Office</th>
+			<th>Age</th>
+			<th>Start date</th>
+			<th>Salary</th>
+		</tr>
+	</thead>
+</table>
+<input type="button" onclick="check();" value="Check">
+	
+<script>
+var table;
+var selectAll = false;
+var unchecked = new Set();
+$(document).ready(function () {
+	
+	
+    table = $('#example').DataTable({
+        processing: true,
+        serverSide: true,
+		'columnDefs': [{
+            'targets': 0,
+            'checkboxes': {
+               'selectRow': true
+            }
+         }],
+		 'select': {
+			 'style': 'multi'
+		  },
+		 "fnDrawCallback": function( oSettings ) {
+			
+			setTimeout(function(){
+				$("input.dt-checkboxes:checkbox").change(function(){
+					
+					if(selectAll){
+						
+						all_data = Array.from(table.column(0).data());
+						selected = Array.from(table.column(0).checkboxes.selected()).map(Number);
+						unselected = all_data.filter(n => !selected.includes(n));
+						
+						unselected.forEach((x)=>{
+							unchecked.add(x);
+						});
+						
+						selected.forEach((x)=>{
+							unchecked.delete(x);
+						});
+					}
+				});
+	
+				if(selectAll && !$(".dt-checkboxes-select-all")[0].firstElementChild.checked){
+					$($(".dt-checkboxes-select-all")[0].firstElementChild).trigger('click');
+					all_data = Array.from(table.column(0).data());
+					data_map = all_data.reduce((a,b,i)=> (a[b]=i , a), {});
+					var needToReset =  Array.from(unchecked).filter(value => all_data.includes(value));
+					
+					needToReset.forEach((x)=>{
+						if($('tbody tr:nth-child('+(data_map[x]+1)+') td:nth-child(1)>input:checkbox').is(":checked")){
+							$('tbody tr:nth-child('+(data_map[x]+1)+') td:nth-child(1)>input:checkbox').click();
+						}
+					});
+					
+				}else if(!selectAll && $(".dt-checkboxes-select-all")[0].firstElementChild.checked){
+					$($(".dt-checkboxes-select-all")[0].firstElementChild).trigger('click');
+				}
+				
+				if(unchecked.size){
+					$(".dt-checkboxes-select-all")[0].firstElementChild.indeterminate = true;
+				}
+				
+				
+				
+			},50);
+			
+			
+		},
+        ajax: 'http://127.0.0.1:5000'
+		
+		
+    });
+	//ajax: 'https://raw.githubusercontent.com/subhamgoto/sample_codes/main/test2.json'
+	$(".dt-checkboxes-select-all").click(function(e){
+		if(this.firstElementChild.checked){
+			selectAll = true;
+			if(e.hasOwnProperty('originalEvent')){
+				unchecked = new Set();
+			}
+		}else{
+			selectAll = false;
+			table.column(0).checkboxes.deselectAll();
+		}
+	});
+	
+	
+	
+	
+
+});
+
+function check(){
+	if(selectAll){
+		alert("get all except: "+ JSON.stringify(Array.from(unchecked)))
+	}else{
+		selected = Array.from(table.column(0).checkboxes.selected()).map(Number);
+		alert("only get these ids: "+ JSON.stringify(selected));
+	}
+}
+
+</script>
