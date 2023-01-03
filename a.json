@@ -1,0 +1,119 @@
+{
+    "variables": {
+        "variable": [
+            {
+                "_id": "Mlc2t*$D%!GdPizF{G[l",
+                "__text": "a"
+            },
+            {
+                "_id": "Q{_|)heZZ%WkXJe/HTg-",
+                "__text": "x"
+            },
+            {
+                "_id": "$(jR^(H=xEJ:F4^_C*%f",
+                "__text": "y"
+            },
+            {
+                "_id": "7EIjYkXTJ;HBCR,hA-;h",
+                "__text": "z"
+            }
+        ]
+    },
+    "block": [
+        {
+            "field": {
+                "_name": "VAR",
+                "_id": "Mlc2t*$D%!GdPizF{G[l",
+                "__text": "a"
+            },
+            "value": {
+                "block": {
+                    "mutation": {
+                        "arg": [
+                            {
+                                "_name": "x"
+                            },
+                            {
+                                "_name": "y"
+                            }
+                        ],
+                        "_name": "abc2"
+                    },
+                    "_type": "custom_procedures_return",
+                    "_id": "Uy_)p8Y%Bo2wHuR!X7Sj"
+                },
+                "_name": "VALUE"
+            },
+            "_type": "variables_set",
+            "_id": "Mra(3pVuTOd9LG[oR]d~",
+            "_x": "18",
+            "_y": "61"
+        },
+        {
+            "value": {
+                "shadow": {
+                    "field": {
+                        "_name": "TEXT",
+                        "__text": "abc"
+                    },
+                    "_type": "text",
+                    "_id": "NM@8*n4Y(v8YF~RFlf{W"
+                },
+                "block": {
+                    "mutation": {
+                        "_items": "2"
+                    },
+                    "value": {
+                        "block": {
+                            "mutation": {
+                                "arg": [
+                                    {
+                                        "_name": "x"
+                                    },
+                                    {
+                                        "_name": "y"
+                                    },
+                                    {
+                                        "_name": "z"
+                                    }
+                                ],
+                                "_name": "abc2"
+                            },
+                            "_type": "custom_procedures_return",
+                            "_id": "bJ{c]F!~k:p{?hGrhI-s"
+                        },
+                        "_name": "ADD1"
+                    },
+                    "_type": "text_join",
+                    "_id": "6~.H:Kz5Vo3^h~B;Q!8P"
+                },
+                "_name": "TEXT"
+            },
+            "_type": "text_print",
+            "_id": "A+(bJ|W4p@nMmpBMr{j*",
+            "_x": "-16",
+            "_y": "176"
+        },
+        {
+            "mutation": {
+                "arg": [
+                    {
+                        "_name": "x"
+                    },
+                    {
+                        "_name": "y"
+                    },
+                    {
+                        "_name": "z"
+                    }
+                ],
+                "_name": "abc2"
+            },
+            "_type": "custom_procedures_return",
+            "_id": "-L``8ANFt97JxNdww,RT",
+            "_x": "88",
+            "_y": "315"
+        }
+    ],
+    "_xmlns": "https://developers.google.com/blockly/xml"
+}
