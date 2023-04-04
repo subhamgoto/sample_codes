@@ -1,0 +1,39 @@
+def merge_dicts(a, b):
+    if a["title"] == b["title"]:
+        result = {"title": a["title"], "children": []}
+        a_children = a.get("children", [])
+        b_children = b.get("children", [])
+        for child in a_children + b_children:
+            found = False
+            for existing_child in result["children"]:
+                if existing_child["title"] == child["title"]:
+                    merge_dicts(existing_child, child)
+                    found = True
+                    break
+            if not found:
+                result["children"].append(child)
+        return result
+    else:
+        raise ValueError("Cannot merge dictionaries with different titles")
+
+# Example usage:
+a = {
+    "title":"a2",
+    "children": [
+        {
+            "title": "child1"
+        }
+    ]
+}
+
+b= {
+    "title":"a1",
+    "children": [
+        {
+            "title": "child2"
+        }
+    ]
+}
+
+output = merge_dicts(a, b)
+print(output)
